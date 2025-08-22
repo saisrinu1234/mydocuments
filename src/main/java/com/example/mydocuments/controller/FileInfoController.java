@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.mydocuments.Repository.FileInfoRepository;
 import com.example.mydocuments.model.FileInfo;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/api")
 public class FileInfoController {
@@ -53,6 +55,7 @@ public class FileInfoController {
     }
 
     @PutMapping("/update")
+    @Transactional
     public ResponseEntity<String> update(@RequestParam("filename") String filename, @RequestParam("newfilename") String newfilename) {
 
         if (fileInfoRepository.existsByFileName(newfilename)) {
